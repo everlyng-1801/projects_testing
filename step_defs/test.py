@@ -1,0 +1,28 @@
+from seleniumbase import BaseCase
+BaseCase.main(__name__, __file__)
+
+class CoffeeCartTest(BaseCase):
+    def test_coffee_cart(self):
+        self.open("https://seleniumbase.io/coffee/")
+        time.sleep(1)
+        self.assert_title("Coffee Cart")
+        time.sleep(1)
+        self.click('div[data-sb="Cappuccino"]')
+        time.sleep(1)
+        self.click('div[data-sb="Flat-White"]')
+        time.sleep(1)
+        self.click('div[data-sb="Cafe-Latte"]')
+        time.sleep(1)
+        self.click('a[aria-label="Cart page"]')
+        time.sleep(1)
+        self.assert_exact_text("Total: $53.00", "button.pay")
+        time.sleep(1)
+        self.click("button.pay")
+        time.sleep(1)
+        self.type("input#name", "Selenium Coffee")
+        time.sleep(1)
+        self.type("input#email", "test@test.test")
+        time.sleep(1)
+        self.click("button#submit-payment")
+        time.sleep(1)
+        self.assert_text("Thanks for your purchase.", "#app .success")
